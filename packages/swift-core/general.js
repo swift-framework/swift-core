@@ -14,6 +14,7 @@ mp.events.addCommand({
     'pay': (player, _, user, amount) => {
         if(!user || !amount) return player.outputChatbox(`${swift.prefix.syntax} /pay [name/id] [amount]`);
         if(isNaN(amount) || amount <= 0) return player.outputChatBox(`${swift.prefix.error} You must enter a valid number.`);
+        if(player.data.money < amount) return player.outputChatBox(`${swift.prefix.error} You do not have that much money`);
         let target = swift.utility.findPlayer(user);
         if(target.handle === player.handle) return player.outputChatBox(`${swift.prefix.error} You cannot pay yourself.`);
         if(target.dist(player.position) >= 5) return player.outputChatBox(`${swift.prefix.error} That player is too far away from you.`);

@@ -63,7 +63,7 @@ mp.events.addCommand({
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /freeze [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
-        player.call('freezePlayer', [user]);
+        user.call('freezePlayer', [user]);
         user.outputChatBox(`${swift.prefix.server} You have been frozen by an administrator.`);
     },
     'unfreeze': (player, target) => {
