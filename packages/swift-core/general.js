@@ -12,14 +12,14 @@ mp.events.addCommand({
         player.outputChatBox('/me, /do, /b');
     },
     'pay': (player, _, user, amount) => {
-        if(!user || !amount) return player.outputChatbox(`${swift.prefix.syntax} /pay [name/id] [amount]`);
+        if(!user || !amount) return player.outputChatBox(`${swift.prefix.syntax} /pay [name/id] [amount]`);
         if(isNaN(amount) || amount <= 0) return player.outputChatBox(`${swift.prefix.error} You must enter a valid number.`);
         if(player.data.money < amount) return player.outputChatBox(`${swift.prefix.error} You do not have that much money`);
         let target = swift.utility.findPlayer(user);
-        if(target.handle === player.handle) return player.outputChatBox(`${swift.prefix.error} You cannot pay yourself.`);
+        if(target === player) return player.outputChatBox(`${swift.prefix.error} You cannot pay yourself.`);
         if(target.dist(player.position) >= 5) return player.outputChatBox(`${swift.prefix.error} That player is too far away from you.`);
-        target.data.money += amount;
-        player.data.money -= amount;
+        target.data.money += parseInt(amount);
+        player.data.money -= parseInt(amount);
         mp.players.broadcastInRange(player.position, 10, `!{#d19aed}* ${player.name} hands over money to ${target.name}`);
         player.outputChatBox(`${swift.prefix.info} You have just paid ${target.name} $${amount}`);
         target.outputChatBox(`${swift.prefix.info} You have just received $${amount} from ${player.name}`);
