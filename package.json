@@ -1,0 +1,30 @@
+{
+  "name": "swift-framework",
+  "version": "1.0.0",
+  "description": "Swift Framework built for RAGE Multiplayer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/MrPancakers/swift-framework.git"
+  },
+  "author": "MrPancakers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/MrPancakers/swift-framework/issues"
+  },
+  "homepage": "https://gitlab.com/MrPancakers/swift-framework#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "chalk": "^2.4.2",
+    "heartbeats": "^5.0.1",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#master",
+    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#master",
+    "eslint": "^5.13.0"
+  }
+}

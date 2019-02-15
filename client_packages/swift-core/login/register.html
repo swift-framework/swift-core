@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="style.css" rel="stylesheet"/>
+        <link href="../assets/css/font-awesome.min.css" rel="stylesheet"/>
+        <script src="../assets/js/jquery-3.2.1.js"></script>
+    </head>
+    <body>
+        <form id="auth-form">
+            <i class="fas fa-dove d-flex justify-content-center"></i>
+            <h1 class="text-center">Swift Roleplay</h1>
+            <div class="alert alert-danger short-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Username or Password is too short
+            </div>
+            <div class="alert alert-danger incorrect-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Incorrect username or password.
+            </div>
+            <div class="alert alert-danger logged" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Account is currently in use.
+            </div>
+            <div class="alert alert-danger taken-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Username or email has been taken.
+            </div>
+            <div class="alert alert-danger short-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Username or Password is too short.
+            </div>
+            <div class="alert alert-danger password-mismatch" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: Your password didn't match.
+            </div>
+            <div class="alert alert-danger banned" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: You are banned.
+            </div>
+            <div class="alert alert-danger invalid-info" role="alert">
+                <i class="fas fa-exclamation-circle"></i> Error: You have entered invalid information (Bad username or email)
+            </div>
+            <input type="text" name="username" id="registerName" min="3" placeholder="Roleplay Name (John_Doe)" required>
+            <input type="email" name="email" id="registerEmail" placeholder="Email Address" required>
+            <input type="password" name="password" id="registerPass" min="5" placeholder="Password (Min 5)" required>
+            <input type="password" name="password" id="registerPass2" min="5" placeholder="Repeat Password" required>
+            <input type="submit" id="registerBtn" value="Register" onclick="sendAccountInfo(1);">
+            <small>Already have an account? <a href="index.html">Go back</a></small>
+        </form>
+        <script src="../assets/js/main.js"></script>
+        <script type="text/javascript">
+            $('.alert-danger').hide();
+        </script>
+    </body>
+</html>

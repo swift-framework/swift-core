@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+/*
+    Palette: https://flatuicolors.com/palette/gb
+*/
+
+html body {
+    background-color: rgba(0, 0, 0, 0.0);
+    font-family: 'Nunito', sans-serif;
+}
+
+small {
+    color: #dcdde1;
+}
+
+h1 {
+    color: #dcdde1;
+    margin-bottom: 10%;
+    margin-top:5%;
+    font-size: 2rem;
+}
+
+a {
+    color: #ffb300;
+}
+
+a:hover {
+    color: #c78b00;
+}
+
+#auth-form {
+    background-color: #202327;
+    max-width: 35%;
+    padding: 5%;
+    height: auto;
+    border-radius: 20px;
+    margin:auto;
+    margin-top: 3%;
+}
+
+::placeholder {
+    /* color: #7f8fa6; */
+    color: #474747;
+}
+
+#auth-form input {
+    margin: 0 auto;
+    width:100%;
+    margin-bottom: 20px;
+    border: 0px;
+    border-bottom: 1px solid #767676;
+    color: #dcdde1;
+    padding:10px 10px;
+    outline:0;
+    background-color: rgba(0,0,0,0);
+}
+
+#auth-form #loginBtn {
+    border-radius: 20px;
+    border:none;
+    background-image: linear-gradient(to left, #f12711, #f5af19);
+    padding: 20px 0 20px;
+    color:white;
+    cursor: pointer;
+}
+
+#auth-form #registerBtn {
+    border-radius: 20px;
+    border:none;
+    background-image: linear-gradient(to left, #f12711, #f5af19);
+    padding: 20px 0 20px;
+    color:white;
+    cursor: pointer;
+}
+
+#auth-form #apex-logo {
+    display:block;
+    height:50%;
+    margin: 0px auto;
+    padding-bottom:40px;
+}
+
+.fa-dove {
+    font-size: 100px;
+    background: -webkit-linear-gradient(#f12711, #f5af19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    text-align: center
+}
