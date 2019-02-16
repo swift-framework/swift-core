@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 global.swift = {};
 
 swift.auth = require('./auth.js');
