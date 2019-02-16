@@ -1,5 +1,4 @@
 {
-    "version": "1.0.0",
     "db_host": "localhost",
     "db_name": "swift-rp",
     "db_username": "root",
