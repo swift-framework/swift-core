@@ -9,25 +9,25 @@
 mp.events.addCommand({
     //  Moderator (Level 1)
     'ahelp': (player) => {
-        if(player.data.adminlvl <= 0) {
+        if(player.adminlvl <= 0) {
             player.outputChatBox(`${swift.prefix.permission}`);
         }
-        if(player.data.adminlvl > 0){
+        if(player.adminlvl > 0){
             player.outputChatBox('[1] /a, /ahelp, /mute, /unmute, /kick');
         }
-        if(player.data.adminlvl > 1){
+        if(player.adminlvl > 1){
             player.outputChatBox('[2] /freeze, /unfreeze, /goto, /dimension, /tpto, /tphere, /ajail');
         }
-        if(player.data.adminlvl > 2){
+        if(player.adminlvl > 2){
             player.outputChatBox('[3] /pos, /tempban, /ban, /gotocoord, /weapon, /veh, /skin');
         }
     },
     'a': (player, message) => {
-        if(player.data.adminlvl <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!message) return player.outputChatBox(`${swift.prefix.syntax} /a [message]`);
         mp.players.forEach(user => {
             if(user.data.adminlvl > 0){
-                user.outputChatBox(`!{FFF000}${player.name} [${player.data.adminlvl}]: !{FFF}${message}`);
+                user.outputChatBox(`!{FFF000}${player.name} [${player.adminlvl}]: !{FFF}${message}`);
             }
         });
     },
@@ -194,7 +194,7 @@ mp.events.addCommand({
         if(type != 'hour' && type != 'day' && type != 'year') return player.outputChatBox(`${swift.prefix.error} Type must be 'hour', 'day', or 'year'`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
-        // if(user.data.adminlvl >= player.data.adminlvl) return player.outputChatBox(`${swift.prefix.error} You cannot ban an admin the same rank or higher than you.`);
+        if(user.data.adminlvl >= player.adminlvl) return player.outputChatBox(`${swift.prefix.error} You cannot ban an admin the same rank or higher than you.`);
         let reasonMsg = reason.join(' ');
 
         swift.db.handle.query(`INSERT INTO bans SET userID = ?, username = ?, adminID = ?, unbandate = (now() + INTERVAL ${amount} ${type.toUpperCase()}), reason = ?`, [user.sqlID, user.name, player.sqlID, reasonMsg], function(err){
@@ -237,7 +237,7 @@ mp.events.addCommand({
     },
     //  Owner (Level 9)
     'setadmin': (player, _, target, lvl) => {
-        if(player.data.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !lvl) return player.outputChatBox(`${swift.prefix.syntax} /setadmin [name/id] [level]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -251,7 +251,7 @@ mp.events.addCommand({
         });
     },
     'setlevel': (player, _, target, lvl) => {
-        if(player.data.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !lvl) return player.outputChatBox(`${swift.prefix.syntax} /setlevel [name/id] [level]`);
         let user = swift.utility.findPlayer(target);
         swift.db.handle.query('UPDATE `accounts` SET level = ? WHERE username = ?', [lvl, user.name], function(err){
@@ -264,7 +264,7 @@ mp.events.addCommand({
         });
     },
     'setmoney': (player, _, target, amount) => {
-        if(player.data.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !amount) return player.outputChatBox(`${swift.prefix.syntax} /setmoney [name/id] [amount]`);
         let user = swift.utility.findPlayer(target);
         swift.db.handle.query('UPDATE `accounts` SET money = ? WHERE username = ?', [amount, user.name], function(err){
@@ -277,13 +277,13 @@ mp.events.addCommand({
         });
     },
     'createmarker': (player, _, type, scale) => {
-        if(player.data.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!type || !scale || isNaN(scale)) return player.outputChatBox(`${swift.prefix.syntax} /createmarker [type] [scale]`);
         swift.utility.createMarker(type, player.position.x, player.position.y, player.position.z, scale);
         player.outputChatBox('Marker created');
     },
     'deletemarker': (player, markerID) => {
-        if(player.data.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.adminlvl <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
         if(isNaN(markerID) || !markerID) return player.outputChatBox(`${swift.prefix.syntax} /createmarker [type] [scale]`);
         swift.utility.deleteMarker(player, markerID);
         player.outputChatBox(`Marker ID: ${markerID} Deleted`);

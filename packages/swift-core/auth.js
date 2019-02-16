@@ -2,10 +2,11 @@ module.exports = {
     registerAccount: function(player){
         player.data.money = swift.config.startingMoney;
         player.position = new mp.Vector3(-1037.85, -2735.51, 13.76);
-        player.data.adminlvl = 0;
+        player.adminlvl = 0;
         player.health = swift.config.startingHealth;
         player.armour = swift.config.startingArmour;
         player.loggedInAs = player.name;
+        player.data.loggedIn = true;
         player.data.limbo = false;
         player.data.bAmount = 50;
     },
@@ -18,19 +19,17 @@ module.exports = {
         swift.db.handle.query('SELECT * FROM `accounts` WHERE username = ?', [player.name], function(err, res){
             if(!err){
                 if(res.length){
-                    res.forEach(function(playerData){
-                        player.name = playerData.username;
-                        player.sqlID = playerData.id;
-                        player.data.money = playerData.money;
-                        player.data.adminlvl = playerData.adminlvl;
-                        player.position = new mp.Vector3(playerData.posX, playerData.posY, playerData.posZ);
-                        player.health = playerData.health;
-                        player.armour = playerData.armour;
-                        player.loggedInAs = playerData.username;
-                        player.data.loggedIn = true;
-                        player.data.limbo = false;
-                        player.data.bAmount = playerData.bAmount;
-                    });
+                    player.name = res[0]['username'];
+                    player.sqlID = res[0]['id'];
+                    player.data.money = res[0]['money'];
+                    player.adminlvl = res[0]['adminlvl'];
+                    // player.position = new mp.Vector3(res[0]['posX'], res[0]['posY'], res[0]['posZ']);
+                    player.health = res[0]['health'];
+                    player.armour = res[0]['armour'];
+                    player.loggedInAs = res[0]['username'];
+                    player.data.loggedIn = true;
+                    player.data.limbo = false;
+                    player.data.bAmount = res[0]['bAmount'];
                     console.log(`${player.name} has logged in`);
                 }
             } else {
