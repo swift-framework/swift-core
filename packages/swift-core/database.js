@@ -53,7 +53,7 @@ mp.events.add('sendDataToServer', (player, username, email, pass, state) => {
                     let sqlPassword = res[0]['password'];
                     bcrypt.compare(pass, sqlPassword, function(err, res2) {
                         if(res2 === true){  //Password is correct
-                            swift.db.handle.query('SELECT * FROM `bans` WHERE DATE(`unbandate`) < NOW() AND `username` = ?', [username], function(banErr, banRes){
+                            swift.db.handle.query('SELECT `unbandate`, `reason` FROM `bans` WHERE `unbandate` > NOW() AND `username` = ?', [username], function(banErr, banRes){
                                 if(banErr) return console.log(swift.chalk.red(`[MySQL] ERROR: ${banErr.sqlMessage}\n[MySQL] QUERY: ${banErr.sql}`));
                                 if(banRes.length == 0){
                                     player.name = username;
@@ -139,11 +139,3 @@ function resetTimeout(user){
         user.kick();
     }, 60000);
 }
-
-/*
-
-SQL testing
-SELECT `unbandate` FROM `bans` WHERE DATE(`unbandate`) < NOW() AND `username` = 'MrPancakers';
-SELECT NOW();
-
-*/
