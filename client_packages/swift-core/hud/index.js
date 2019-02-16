@@ -1,8 +1,8 @@
 let money;
 let enableHud = false;
 
-mp.events.addDataHandler('loggedIn', () => {
-    money = mp.players.local.getVariable('money');
+mp.events.addDataHandler('loggedIn', (entity) => {
+    money = entity.getVariable('money');
     enableHud = true;
 });
 
