@@ -1,4 +1,11 @@
+const fs = require('fs');
+
 global.swift = {};
+
+if(!fs.existsSync('packages/swift-core/config.json')){
+    console.log(`You do not have a 'config.json' file setup`);
+    process.exit(0);
+}
 
 swift.auth = require('./auth.js');
 swift.chalk = require('chalk');
