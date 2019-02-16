@@ -45,7 +45,6 @@ mp.events.add('sendDataToServer', (player, username, email, pass, state) => {
     case 0: //Login State
     {
         if(loggedAccount){
-            console.log('Logged in already.');
             player.call('loginHandler', ['logged']);
         } else {
             swift.db.handle.query('SELECT `password` FROM `accounts` WHERE `username` = ?', [username], function(err, res){
