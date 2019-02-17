@@ -1,5 +1,5 @@
 var loginBrowser = mp.browsers.new('package://swift-core/login/index.html');
-let loginCam = mp.cameras.new('default', new mp.Vector3(0,  0,  0), new mp.Vector3(0,0,0), 40);
+let loginCam = mp.cameras.new('default', new mp.Vector3(0, 0, 0), new mp.Vector3(0, 0, 0), 40);
 mp.gui.cursor.show(true, true);
 
 mp.events.add('loginDataToServer', (user, email, pass, state) => {
@@ -71,7 +71,7 @@ mp.events.add('loginHandler', (handle) => {
 mp.events.add('enableLoginCamera', () => {
     mp.players.local.position = new mp.Vector3(-1757.12, -739.53, 10);
     mp.players.local.freezePosition(true);
-    mp.game.ui.setMinimapVisible(true); /* this is reversed */
+    mp.game.ui.setMinimapVisible(true);
     mp.game.ui.displayRadar(false);
 
     loginCam.setActive(true);
@@ -83,6 +83,6 @@ mp.events.add('enableLoginCamera', () => {
 mp.events.add('disableLoginCamera', () => {
     mp.game.cam.renderScriptCams(false, false, 0, false, false);
     mp.players.local.freezePosition(false);
-    mp.game.ui.setMinimapVisible(false); /* this is reversed */
+    mp.game.ui.setMinimapVisible(false);
     mp.game.ui.displayRadar(true);
 });
