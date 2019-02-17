@@ -1,9 +1,11 @@
 let money;
 let enableHud = false;
 
-mp.events.addDataHandler('loggedIn', (entity) => {
-    money = entity.getVariable('money');
-    enableHud = true;
+mp.events.addDataHandler('loggedIn', (entity, value) => {
+    if(value){
+        money = entity.getVariable('money');
+        enableHud = true;
+    }
 });
 
 mp.events.addDataHandler('money', (entity, value) => {

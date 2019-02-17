@@ -26,7 +26,6 @@ module.exports = {
                 swift.colshapes[markerData.id] = mp.colshapes.newSphere(markerData.x, markerData.y, markerData.z, 1.5);
                 swift.colshapes[markerData.id].setVariable('colType', markerData.type);
             });
-            console.log(`Markers loaded: ${rows.length}`);
         });
     },
     'deleteMarker': (player, markerID) => {

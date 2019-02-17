@@ -17,23 +17,23 @@ module.exports =
             if(err){
                 switch(err.code){
                 case 'ECONNREFUSED':
-                    console.log(`${swift.chalk.green('[Swift-DB] ') + swift.chalk.red('Error: Check your connection details (packages/swift-core/database.js) or make sure your MySQL server is running.')}`);
+                    console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: Check your connection details (packages/swift-core/database.js) or make sure your MySQL server is running.')}`);
                     break;
                 case 'ER_BAD_DB_ERROR':
-                    console.log(`${swift.chalk.green('[Swift-DB] ') + swift.chalk.red('Error: The database name you\'ve entered does not exist.')}`);
+                    console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: The database name you\'ve entered does not exist.')}`);
                     break;
                 case 'ER_ACCESS_DENIED_ERROR':
-                    console.log(`${swift.chalk.green('[Swift-DB] ') + swift.chalk.red('Error: Check your MySQL username and password and make sure they\'re correct.')}`);
+                    console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: Check your MySQL username and password and make sure they\'re correct.')}`);
                     break;
                 case 'ENOENT':
-                    console.log(`${swift.chalk.green('[Swift-DB] ') + swift.chalk.red('Error: There is no internet connection. Check your connection and try again.')}`);
+                    console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: There is no internet connection. Check your connection and try again.')}`);
                     break;
                 default:
-                    console.log(`${swift.chalk.green('[Swift-DB] ') + swift.chalk.red('Error: ' + err.code)}`);
+                    console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: ' + err.code)}`);
                     break;
                 }
             } else {
-                console.log(`${swift.chalk.green('[Swift-DB]')} Connected Successfully`);
+                console.log(`${swift.chalk.green('[Swift-Core]')} Connected Successfully`);
             }
         });
     }
