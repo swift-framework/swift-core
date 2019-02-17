@@ -29,6 +29,10 @@ a:hover {
     border: none;
 }
 
+.row {
+    margin-right: 0px;
+}
+
 .nav-tabs .nav-link.active {
     background: none;
     border:none;

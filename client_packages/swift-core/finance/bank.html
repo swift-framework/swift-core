@@ -18,58 +18,54 @@
                         <h2 class="text-center">Balance: $<span id="mAmount"></span></h2>
                         <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="deposit-tab" data-toggle="tab" href="#deposit" role="tab" aria-controls="deposit" aria-selected="false">Deposit</a>
+                                <a class="nav-link" id="deposit-tab" data-toggle="tab" href="#deposit" role="tab">Deposit</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="withdraw-tab" data-toggle="tab" href="#withdraw" role="tab" aria-controls="withdraw" aria-selected="false">Withdraw</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="transfer-tab" data-toggle="tab" href="#transfer" role="tab" aria-controls="transfer" aria-selected="false">Transfer</a>
+                                <a class="nav-link" id="withdraw-tab" data-toggle="tab" href="#withdraw" role="tab">Withdraw</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel">
                             <div class="card-body">
                                 <h3 class="text-center">Welcome to the Bank of Los Santos</h3>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="deposit" role="tabpanel" aria-labelledby="deposit-tab">
+                        <div class="tab-pane fade" id="deposit" role="tabpanel">
                             <div class="card-body">
                                 <h3 class="text-center">Deposit Money</h3>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="Amount" min="1">
+                                    <input type="number" class="form-control" id='depositValue' placeholder="Amount" min="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-success" type="button" id="button-addon2" onclick="depositMoney()">Deposit</button>
+                                        <button class="btn btn-outline-success" type="button" onclick="bankFunction('deposit');">Deposit</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="withdraw" role="tabpanel" aria-labelledby="withdraw-tab">
+                        <div class="tab-pane fade" id="withdraw" role="tabpanel">
                             <div class="card-body">
                                 <h3 class="text-center">Withdraw Money</h3>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">$</span>
+                                        <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" placeholder="Amount" min="1">
+                                    <input type="number" class="form-control" id='withdrawValue' placeholder="Amount" min="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-success" type="button" id="button-addon2">Withdraw</button>
+                                        <button class="btn btn-outline-success" type="button" onclick="bankFunction('withdraw');">Withdraw</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="transfer" role="tabpanel" aria-labelledby="transfer-tab">...</div>
                         </div>
                     <button class="btn btn-danger btn-block" onclick="mp.trigger('closeBankUI')">Exit</button>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="index.js"></script>
     </body>
 </html>

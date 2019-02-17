@@ -9,3 +9,29 @@ module.exports = {
         if(user.data.money < amount) return user.outputChatBox(`${swift.prefix.server} You do not have that much to deposit`);
     }
 };
+
+mp.events.add('bankFunction', (player, action, amount) => {
+    switch(action){
+    case 'deposit':
+    {
+        if(player.data.money < amount) return player.outputChatBox(`${swift.prefix.error} You do not have that much money to deposit.`);
+        if(amount < 0) return player.outputChatBox(`${swift.prefix.error} You cannot deposit less than $0.`);
+        player.data.money -= parseInt(amount);
+        player.data.bAmount += parseInt(amount);
+        break;
+    }
+    case 'withdraw':
+    {
+        if(player.data.bAmount < amount) return player.outputChatBox(`${swift.prefix.error} You do not have that much money to withdraw.`);
+        if(amount < 0) return player.outputChatBox(`${swift.prefix.error} You cannot withdraw less than $0.`);
+        player.data.money += parseInt(amount);
+        player.data.bAmount -= parseInt(amount);
+        break;
+    }
+    default:
+    {
+        player.outputChatBox(`Bank Error, report to server developer.`);
+        break;
+    }
+    }
+});
