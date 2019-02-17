@@ -23,6 +23,7 @@ mp.events.add({'openBankUI': () => {
 }
 });
 
+// eslint-disable-next-line no-unused-vars
 function bankFunction(action){
     let money = document.getElementById(`${action}Value`);
     mp.trigger('bankAction', action, money.value);

@@ -1,5 +1,4 @@
 mp.events.add('playerJoin', (player) => {
-    console.log(`${player.name} has joined. [${player.ip}]`);
     player.loggedInAs = '';
     player.data.loggedIn = false;
     player.idleKick = setTimeout(() => {

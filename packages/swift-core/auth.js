@@ -30,7 +30,7 @@ module.exports = {
                     player.data.loggedIn = true;
                     player.data.limbo = false;
                     player.data.bAmount = res[0]['bAmount'];
-                    console.log(`${player.name} has logged in`);
+                    console.log(`${swift.chalk.green(player.name)} has logged in. [${player.ip}]`);
                 }
             } else {
                 return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
