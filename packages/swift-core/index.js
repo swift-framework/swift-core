@@ -34,8 +34,16 @@ swift.prefix.permission = '{eb4d4b}You do not have permission to use that comman
 swift.prefix.syntax = '!{6ab04c}[USAGE] !{fff}';
 swift.prefix.server = '!{42f49b}[SERVER] !{fff}';
 
+swift.ipbans = [];
 swift.markers = {};
 swift.colshapes = {};
 
 swift.db.connect();
 swift.utility.loadMarkers();
+
+swift.db.handle.query('SELECT `ip` from `ip-bans`', [], function(err, res){ //  Load banned IPs into an array
+    if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
+    res.forEach(function(info){
+        swift.ipbans.push(info.ip);
+    });
+});

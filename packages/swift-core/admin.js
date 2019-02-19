@@ -123,7 +123,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} Your dimension has been set to: ${dimension}`);
     },
     'tpto': (player, target) => {
-        if(player.data.admin <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.data.admin <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /tpto [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -131,7 +131,7 @@ mp.events.addCommand({
         player.outputChatBox(`${swift.prefix.server} You have teleported to that player.`);
     },
     'tphere': (player, target) => {
-        if(player.data.admin <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.data.admin <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /tphere [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -168,6 +168,15 @@ mp.events.addCommand({
         player.outputChatBox(`Health: [${user.health}], Armour: [${user.armour}] Kills: [${user.data.kills}], Deaths: [${user.data.deaths}]`);
         player.outputChatBox(`Skin: [${user.model}], Logged In?: [${user.loggedInAs}] Social Club: [${player.socialClub}]`);
         player.outputChatBox('===========[ Lookup Info ]===========');
+    },
+    'iplookup': (player, ip) => {
+        if(player.data.admin <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(!ip) return player.outputChatBox(`${swift.prefix.syntax} /iplookup [ip]`);
+        swift.db.handle.query('SELECT `ip`, `reason` FROM `ip-bans` WHERE `ip` = ?', [ip], function(err, res){
+            if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
+            if(res.length == 0) return player.outputChatBox(`IP ${ip} does not seem to be banned.`);
+            player.outputChatBox(`IP: ${res.ip} Reason: ${res.reason}`);
+        });
     },
     'weapon': (player, weapon_model) => {
         if(player.data.admin <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
@@ -295,6 +304,7 @@ mp.events.addCommand({
         swift.db.handle.query('INSERT INTO `ip-bans` SET ip = ?, reason = ?', [ip, reasonMsg], function(err){
             if(!err){
                 player.outputChatBox(`${swift.prefix.info}Banned IP: ${ip}`);
+                swift.ipbans.push(ip);
             } else {
                 console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
             }
