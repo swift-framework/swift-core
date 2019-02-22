@@ -1,0 +1,56 @@
+html body {
+    background-color: rgba(0, 0, 0, 0.0);
+    font-family: 'Nunito', sans-serif;
+}
+
+a {
+    color: #ffb300;
+}
+
+a:hover {
+    color: #c78b00;
+}
+
+.card {
+    background: #202327;
+    color: #dcdde1;
+    max-width: 75%;
+    height: auto;
+    border-radius: 20px;
+    margin:auto;
+    margin-top: 5%;
+}
+
+.card-header {
+    border-bottom: 1px solid white;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+}
+
+.row {
+    margin-right: 0px;
+}
+
+.nav-tabs .nav-link.active {
+    background: none;
+    border:none;
+    border-bottom:1px solid #ffb300;
+    color: #dcdde1;
+}
+
+.form-control, .form-control:focus, .list-group-item {
+    border: 1px solid #6b6b6b;
+    background-color: #2a2f36;
+    color: #d9dae0;
+}
+
+.input-group-text {
+    background-color: #202327;
+    border: 1px solid #6b6b6b;
+}
+
+.badge a{
+    color:white;
+}

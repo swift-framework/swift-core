@@ -4,11 +4,6 @@
     Palette: https://flatuicolors.com/palette/gb
 */
 
-html body {
-    background-color: rgba(0, 0, 0, 0.0);
-    font-family: 'Nunito', sans-serif;
-}
-
 small {
     color: #dcdde1;
 }
@@ -18,14 +13,6 @@ h1 {
     margin-bottom: 10%;
     margin-top:5%;
     font-size: 2rem;
-}
-
-a {
-    color: #ffb300;
-}
-
-a:hover {
-    color: #c78b00;
 }
 
 #auth-form {
