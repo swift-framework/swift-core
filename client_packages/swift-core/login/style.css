@@ -60,13 +60,6 @@ h1 {
     cursor: pointer;
 }
 
-#auth-form #apex-logo {
-    display:block;
-    height:50%;
-    margin: 0px auto;
-    padding-bottom:40px;
-}
-
 .fa-dove {
     font-size: 100px;
     background: -webkit-linear-gradient(#f12711, #f5af19);

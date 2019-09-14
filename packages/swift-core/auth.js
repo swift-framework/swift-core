@@ -2,7 +2,7 @@ module.exports = {
     registerAccount: function(player){
         player.data.money = swift.config.startingMoney;
         player.position = new mp.Vector3(-1037.85, -2735.51, 13.76);
-        player.adminlvl = 0;
+        player.data.adminlvl = 0;
         player.health = swift.config.startingHealth;
         player.armour = swift.config.startingArmour;
         player.loggedInAs = player.name;
@@ -22,7 +22,7 @@ module.exports = {
                     player.name = res[0]['username'];
                     player.sqlID = res[0]['id'];
                     player.data.money = res[0]['money'];
-                    player.adminlvl = res[0]['adminlvl'];
+                    player.data.adminlvl = res[0]['adminlvl'];
                     player.position = new mp.Vector3(res[0]['posX'], res[0]['posY'], res[0]['posZ']);
                     player.health = res[0]['health'];
                     player.armour = res[0]['armour'];

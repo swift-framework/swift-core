@@ -1,5 +1,4 @@
 mp.events.add('playerJoin', (player) => {
-    if(swift.ipbans.indexOf(player.ip) != -1) return player.kick('IP Banned');
     player.loggedInAs = '';
     player.data.loggedIn = false;
     player.idleKick = setTimeout(() => {

@@ -5,3 +5,4 @@ server.exe
 client_packages/.listcache
 node_modules
 packages/swift-core/config.json
+packages/swift-modules

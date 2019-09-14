@@ -1,7 +1,7 @@
 mp.events.addCommand({
     'stats': (player) => {
         player.outputChatBox(`!{#42f49e}========== [ !{#fff}${player.name}'s Stats !{#42f49e}] ==========`);
-        player.outputChatBox(`!{#9effd0}Level: [${player.data.money}], Admin: [${player.adminlvl}]`);
+        player.outputChatBox(`!{#9effd0}Level: [${player.data.money}], Admin: [${player.data.adminlvl}]`);
         player.outputChatBox(`!{#9effd0}Health: [${player.health}], Armour: [${player.armour}], Money: [$${player.data.money}], Bank: [$0]`);
     },
     'time': (player) => {
