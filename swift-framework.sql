@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2019 at 12:22 PM
+-- Generation Time: Sep 30, 2019 at 04:12 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -31,14 +31,13 @@ CREATE TABLE `accounts` (
   `username` varchar(35) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `adminlvl` tinyint(4) NOT NULL DEFAULT '0',
+  `grouplvl` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `money` int(11) NOT NULL DEFAULT '5000',
   `posX` float DEFAULT NULL,
   `posY` float DEFAULT NULL,
   `posZ` float DEFAULT NULL,
   `health` float NOT NULL DEFAULT '100',
   `armour` float NOT NULL DEFAULT '50',
-  `bID` int(10) NOT NULL,
   `bAmount` int(11) NOT NULL DEFAULT '50'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -61,37 +60,25 @@ CREATE TABLE `bans` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ip-bans`
+-- Table structure for table `groups`
 --
 
-CREATE TABLE `ip-bans` (
-  `id` int(11) NOT NULL,
-  `ip` varchar(15) NOT NULL,
-  `reason` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `markers`
---
-
-CREATE TABLE `markers` (
-  `id` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `x` float NOT NULL,
-  `y` float NOT NULL,
-  `z` float NOT NULL,
-  `scale` float NOT NULL
+CREATE TABLE `groups` (
+  `id` tinyint(3) UNSIGNED NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `protected` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `markers`
+-- Dumping data for table `groups`
 --
 
-INSERT INTO `markers` (`id`, `type`, `x`, `y`, `z`, `scale`) VALUES
-(1, 'bank', 242.94, 223.87, 106.29, 1),
-(2, 'bank', 241.09, 224.63, 106.29, 1);
+INSERT INTO `groups` (`id`, `name`, `protected`) VALUES
+(255, 'Owner', 1),
+(0, 'Guest', 1),
+(1, 'Member', 1),
+(2, 'Donator', 0),
+(50, 'Admin', 1);
 
 --
 -- Indexes for dumped tables
@@ -110,15 +97,9 @@ ALTER TABLE `bans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ip-bans`
+-- Indexes for table `groups`
 --
-ALTER TABLE `ip-bans`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `markers`
---
-ALTER TABLE `markers`
+ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -135,16 +116,6 @@ ALTER TABLE `accounts`
 --
 ALTER TABLE `bans`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `ip-bans`
---
-ALTER TABLE `ip-bans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `markers`
---
-ALTER TABLE `markers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

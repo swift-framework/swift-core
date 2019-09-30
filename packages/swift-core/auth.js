@@ -1,8 +1,8 @@
 module.exports = {
     registerAccount: function(player){
-        player.data.money = swift.config.startingMoney;
+        player.setVariable('swift:money', swift.config.startingMoney);
         player.position = new mp.Vector3(-1037.85, -2735.51, 13.76);
-        player.data.adminlvl = 0;
+        player.setVariable('swift:group', 1);
         player.health = swift.config.startingHealth;
         player.armour = swift.config.startingArmour;
         player.loggedInAs = player.name;
@@ -11,7 +11,7 @@ module.exports = {
         player.data.bAmount = 50;
     },
     saveAccount: function(player){
-        swift.db.handle.query('UPDATE `accounts` SET money = ?, posX = ?, posY = ?, posZ = ?, health = ?, armour = ?, bAmount = ? WHERE username = ?', [player.data.money, player.position.x.toFixed(2), player.position.y.toFixed(2), player.position.z.toFixed(2), player.health, player.armour, player.data.bAmount, player.name], function(err){
+        swift.db.handle.query('UPDATE `accounts` SET money = ?, posX = ?, posY = ?, posZ = ?, health = ?, armour = ?, bAmount = ? WHERE username = ?', [player.getVariable('swift:money'), player.position.x.toFixed(2), player.position.y.toFixed(2), player.position.z.toFixed(2), player.health, player.armour, player.data.bAmount, player.name], function(err){
             if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
         });
     },
@@ -21,8 +21,8 @@ module.exports = {
                 if(res.length){
                     player.name = res[0]['username'];
                     player.sqlID = res[0]['id'];
-                    player.data.money = res[0]['money'];
-                    player.data.adminlvl = res[0]['adminlvl'];
+                    player.setVariable('swift:money', res[0]['money']);
+                    player.setVariable('swift:group', res[0]['grouplvl']);
                     player.position = new mp.Vector3(res[0]['posX'], res[0]['posY'], res[0]['posZ']);
                     player.health = res[0]['health'];
                     player.armour = res[0]['armour'];

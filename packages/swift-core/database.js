@@ -34,6 +34,7 @@ module.exports =
                 }
             } else {
                 console.log(`${swift.chalk.green('[Swift-Core]')} Connected Successfully`);
+                swift.loadModules();
             }
         });
     }
@@ -87,7 +88,7 @@ mp.events.add('sendDataToServer', (player, username, email, pass, state) => {
                         bcrypt.hash(pass, null, null, function(err, hash) {
                             if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
                             if(!err){
-                                swift.db.handle.query('INSERT INTO `accounts` SET username = ?, email = ?, password = ?, bID = ?', [username, email, hash, swift.finance.generateBankID()], function(err){
+                                swift.db.handle.query('INSERT INTO `accounts` SET username = ?, email = ?, password = ?', [username, email, hash], function(err){
                                     if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
                                     player.name = username;
                                     player.call('loginHandler', ['registered']);

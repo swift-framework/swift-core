@@ -22,6 +22,9 @@ mp.events.add({'openBankUI': () => {
 },
 'bankAction': (action, amount) => {
     mp.events.callRemote('bankFunction', action, amount);
+},
+'changeMoney': (money) => {
+    mp.game.stats.statSetInt(mp.game.joaat('SP0_TOTAL_CASH'), parseInt(money), true);
 }
 });
 
