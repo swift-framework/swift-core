@@ -51,6 +51,7 @@ mp.Player.prototype.removeMoney = function(amount){
 mp.Player.prototype.sendMoney = function(target, amount){
     if(isNaN(amount) || amount < 0) return this.outputChatBox(`${swift.prefix.error} You must enter a valid number.`);
     if(this.getMoney < amount) return this.outputChatBox(`${swift.prefix.error} You do not have enough money to send.`);
+    if(target === this) return this.outputChatBox(`${swift.prefix.error} You cannot pay yourself.`);
     target.addMoney(amount);
     this.removeMoney(amount);
 };

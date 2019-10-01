@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2019 at 04:12 AM
+-- Generation Time: Oct 01, 2019 at 09:37 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -78,7 +78,9 @@ INSERT INTO `groups` (`id`, `name`, `protected`) VALUES
 (0, 'Guest', 1),
 (1, 'Member', 1),
 (2, 'Donator', 0),
-(50, 'Admin', 1);
+(102, 'Admin', 1),
+(100, 'Moderator', 1),
+(101, 'Trial Admin', 1);
 
 --
 -- Indexes for dumped tables

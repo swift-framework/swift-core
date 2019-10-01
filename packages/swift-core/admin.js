@@ -7,32 +7,32 @@
 
 */
 mp.events.addCommand({
-    //  Moderator (Level 1)
+    //  Moderator (Level 100)
     'ahelp': (player) => {
-        if(player.getGroup() <= 0) {
+        if(player.getGroup() <= 100) {
             player.outputChatBox(`${swift.prefix.permission}`);
         }
-        if(player.getGroup() > 0){
+        if(player.getGroup() > 100){
             player.outputChatBox('[1] /a, /ahelp, /mute, /unmute, /kick');
         }
-        if(player.getGroup() > 1){
+        if(player.getGroup() > 101){
             player.outputChatBox('[2] /freeze, /unfreeze, /goto, /dimension, /tpto, /tphere, /ajail');
         }
-        if(player.getGroup() > 2){
+        if(player.getGroup() > 102){
             player.outputChatBox('[3] /pos, /tempban, /ban, /gotocoord, /weapon, /veh, /skin');
         }
     },
     'a': (player, message) => {
-        if(player.getGroup() <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 100) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!message) return player.outputChatBox(`${swift.prefix.syntax} /a [message]`);
         mp.players.forEach(user => {
-            if(user.data.getGroup() > 0){
+            if(user.getGroup() > 100){
                 user.outputChatBox(`!{FFF000}${player.name} [${player.getGroup()}]: !{FFF}${message}`);
             }
         });
     },
     'mute': (player, target) => {
-        if(player.getGroup() <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 100) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /mute [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -40,7 +40,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} You have been muted by an administrator.`);
     },
     'unmute': (player, target) => {
-        if(player.getGroup() <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 100) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /unmute [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -48,18 +48,18 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} You have been unmuted by an administrator.`);
     },
     'kick': (player, _, target, ...reason) => {
-        if(player.getGroup() <= 0) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 100) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !reason) return player.outputChatBox(`${swift.prefix.syntax} /kick [name/id] [reason]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
-        if(user.data.getGroup() > 0) return player.outputChatBox(`${swift.prefix.error} You cannot kick another administrator.`);
+        if(user.getGroup() > 0) return player.outputChatBox(`${swift.prefix.error} You cannot kick another administrator.`);
         let reasonMessage = reason.join(' ');
         user.outputChatBox(`${swift.prefix.server} You have been kicked from the server. Reason: ${reasonMessage}`);
         user.kick('Kicked.');
     },
-    //  Trial Admin (Level 2)
+    //  Trial Admin (Level 101)
     'freeze': (player, target) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /freeze [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -67,7 +67,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} You have been frozen by an administrator.`);
     },
     'unfreeze': (player, target) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /unfreeze [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -75,7 +75,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} You have been unfrozen by an administrator.`);
     },
     'goto': (player, location) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!location) return player.outputChatBox(`${swift.prefix.syntax} /goto [location] - Use '/goto help' for locations`);
         switch(location.toLowerCase()){
         case 'help':
@@ -108,7 +108,7 @@ mp.events.addCommand({
         }
     },
     'dimension': (player, _, target, dimension) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !dimension) return player.outputChatBox(`${swift.prefix.syntax} /dimension [name/id] [dimension]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -116,7 +116,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} Your dimension has been set to: ${dimension}`);
     },
     'tpto': (player, target) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /tpto [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -124,21 +124,21 @@ mp.events.addCommand({
         player.outputChatBox(`${swift.prefix.server} You have teleported to that player.`);
     },
     'tphere': (player, target) => {
-        if(player.getGroup() <= 1) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 101) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /tphere [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
         user.position = new mp.Vector3(player.position.x + 2, player.position.y + 2, player.position.z);
         user.outputChatBox(`${swift.prefix.server} You have been teleported to an administrator.`);
     },
-    //  Administrator (Level 3)
+    //  Administrator (Level 102)
     'pos': (player) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         console.log(`Position: ${player.position.x.toFixed(2)} ${player.position.y.toFixed(2)} ${player.position.z.toFixed(2)}, ${player.heading.toFixed(2)}`);
         player.outputChatBox(`${swift.prefix.server} Position: ${player.position.x.toFixed(2)} ${player.position.y.toFixed(2)} ${player.position.z.toFixed(2)}, ${player.heading.toFixed(2)}`);
     },
     'veh': (player, veh_model) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!veh_model) return player.outputChatBox(`${swift.prefix.syntax} /veh [vehicle_model]`);
         if(player.data.adminVeh) player.data.adminVeh.destroy();
         player.data.adminVeh = mp.vehicles.new(mp.joaat(veh_model), player.position,
@@ -152,7 +152,7 @@ mp.events.addCommand({
         player.outputChatBox(`${swift.prefix.server} You have created an admin vehicle.`);
     },
     'lookup': (player, target) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target) return player.outputChatBox(`${swift.prefix.syntax} /lookup [name/id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -163,7 +163,7 @@ mp.events.addCommand({
         player.outputChatBox('===========[ Lookup Info ]===========');
     },
     'iplookup': (player, ip) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!ip) return player.outputChatBox(`${swift.prefix.syntax} /iplookup [ip]`);
         swift.db.handle.query('SELECT `ip`, `reason` FROM `ip-bans` WHERE `ip` = ?', [ip], function(err, res){
             if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
@@ -172,18 +172,18 @@ mp.events.addCommand({
         });
     },
     'weapon': (player, weapon_model) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         player.giveWeapon(mp.joaat(weapon_model), 1000);
         player.outputChatBox(`${swift.prefix.server} You have received your weapon.`);
     },
     'gotocoord': (player, _, x, y, z) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!x || !y || !z) return player.outputChatBox(`${swift.prefix.syntax} /gotocoord [x] [y] [z]`);
         player.position = new mp.Vector3(parseInt(x), parseInt(y), parseInt(z));
         player.outputChatBox(`${swift.prefix.server} You've been teleported to ${x} ${y} ${z}`);
     },
     'skin': (player, _, target, skinid) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !skinid) return player.outputChatBox(`${swift.prefix.syntax} /skin [name/id] [skin id]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -191,7 +191,7 @@ mp.events.addCommand({
         user.outputChatBox(`${swift.prefix.server} Your player model has been updated.`);
     },
     'ban': (player, _, target, amount, type, ...reason) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !amount || !type || !reason || isNaN(amount)) return player.outputChatBox(`${swift.prefix.syntax} /ban [name/id] [amount] [hour/day/year] [reason] `);
         if(type != 'hour' && type != 'day' && type != 'year') return player.outputChatBox(`${swift.prefix.error} Type must be 'hour', 'day', or 'year'`);
         let user = swift.utility.findPlayer(target);
@@ -210,7 +210,7 @@ mp.events.addCommand({
         });
     },
     'sethealth': (player, _, target, health) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !health) return player.outputChatBox(`${swift.prefix.syntax} /sethealth [name/id] [amount]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -218,7 +218,7 @@ mp.events.addCommand({
         player.outputChatBox(`${swift.prefix.server} You've set ${user.name}'s health to ${health}`);
     },
     'setarmour': (player, _, target, armour) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !armour) return player.outputChatBox(`${swift.prefix.syntax} /setarmour [name/id] [amount]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -226,7 +226,7 @@ mp.events.addCommand({
         player.outputChatBox(`${swift.prefix.server} You've set ${user.name}'s armour to ${armour}`);
     },
     'ajail': (player, _, target, ...reason) => {
-        if(player.getGroup() <= 2) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !reason) return player.outputChatBox(`${swift.prefix.syntax} /ajail [name/id] [reason]`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
@@ -239,7 +239,7 @@ mp.events.addCommand({
     },
     //  Owner (Level 9)
     'setgroup': (player, _, target, lvl) => {
-        if(player.getGroup() <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() !== 255) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !lvl) return player.outputChatBox(`${swift.prefix.syntax} /setgroup [name/id] [level]`);
         if(lvl > 255) return player.outputChatBox(`${swift.prefix.error} Group levels cannot be larger than 255.`);
         let user = swift.utility.findPlayer(target);
@@ -254,7 +254,7 @@ mp.events.addCommand({
         });
     },
     'setmoney': (player, _, target, amount) => {
-        if(player.getGroup() <= 8) return player.outputChatBox(`${swift.prefix.permission}`);
+        if(player.getGroup() !== 255) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !amount) return player.outputChatBox(`${swift.prefix.syntax} /setmoney [name/id] [amount]`);
         let user = swift.utility.findPlayer(target);
         swift.db.handle.query('UPDATE `accounts` SET money = ? WHERE username = ?', [amount, user.name], function(err){
