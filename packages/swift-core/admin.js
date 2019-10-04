@@ -165,7 +165,7 @@ mp.events.addCommand({
     'iplookup': (player, ip) => {
         if(player.getGroup() <= 102) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!ip) return player.outputChatBox(`${swift.prefix.syntax} /iplookup [ip]`);
-        swift.db.handle.query('SELECT `ip`, `reason` FROM `ip-bans` WHERE `ip` = ?', [ip], function(err, res){
+        swift.db.query('SELECT `ip`, `reason` FROM `ip-bans` WHERE `ip` = ?', [ip], function(err, res){
             if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
             if(res.length == 0) return player.outputChatBox(`IP ${ip} does not seem to be banned.`);
             player.outputChatBox(`IP: ${res.ip} Reason: ${res.reason}`);
@@ -199,7 +199,7 @@ mp.events.addCommand({
         if(user.getGroup() >= player.getGroup()) return player.outputChatBox(`${swift.prefix.error} You cannot ban an admin the same rank or higher than you.`);
         let reasonMsg = reason.join(' ');
 
-        swift.db.handle.query(`INSERT INTO bans SET userID = ?, username = ?, adminID = ?, unbandate = (now() + INTERVAL ${amount} ${type.toUpperCase()}), reason = ?`, [user.sqlID, user.name, player.sqlID, reasonMsg], function(err){
+        swift.db.query(`INSERT INTO bans SET userID = ?, username = ?, adminID = ?, unbandate = (now() + INTERVAL ${amount} ${type.toUpperCase()}), reason = ?`, [user.sqlID, user.name, player.sqlID, reasonMsg], function(err){
             if(!err){
                 user.outputChatBox(`${swift.prefix.server} You have been banned for the following reason:`);
                 user.outputChatBox(`${reasonMsg}`);
@@ -244,7 +244,7 @@ mp.events.addCommand({
         if(lvl > 255) return player.outputChatBox(`${swift.prefix.error} Group levels cannot be larger than 255.`);
         let user = swift.utility.findPlayer(target);
         if(user == null) return player.outputChatBox(`${swift.prefix.error} Player not found.`);
-        swift.db.handle.query('UPDATE `accounts` SET grouplvl = ? WHERE username = ?', [lvl, user.name], function(err){
+        swift.db.query('UPDATE `accounts` SET grouplvl = ? WHERE username = ?', [lvl, user.name], function(err){
             if(!err){
                 user.setVariable('swift:group', lvl);
                 player.outputChatBox(`${swift.prefix.server} ${user.name}'s admin rank has been updated to ${lvl}`);
@@ -257,7 +257,7 @@ mp.events.addCommand({
         if(player.getGroup() !== 255) return player.outputChatBox(`${swift.prefix.permission}`);
         if(!target || !amount) return player.outputChatBox(`${swift.prefix.syntax} /setmoney [name/id] [amount]`);
         let user = swift.utility.findPlayer(target);
-        swift.db.handle.query('UPDATE `accounts` SET money = ? WHERE username = ?', [amount, user.name], function(err){
+        swift.db.query('UPDATE `accounts` SET money = ? WHERE username = ?', [amount, user.name], function(err){
             if(!err){
                 user.setMoney(amount);
                 player.outputChatBox(`${swift.prefix.server} ${user.name}'s money has been updated to ${amount}`);

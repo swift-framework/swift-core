@@ -24,7 +24,6 @@ swift.prefix.server = '!{42f49b}[SERVER] !{fff}';
 
 swift.chalk = require('chalk');
 swift.db = require('./database.js');
-swift.db.connect();
 
 swift.loadModules = function(){
     swift.auth = require('./auth.js');

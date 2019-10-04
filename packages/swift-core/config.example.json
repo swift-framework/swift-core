@@ -3,6 +3,8 @@
     "db_name": "swift-rp",
     "db_username": "root",
     "db_password": "",
+    "db_connectionLimit": 99,
+    "db_debug": false,
     "startingMoney": 1000,
     "startingHealth": 100,
     "startingArmour": 0,
