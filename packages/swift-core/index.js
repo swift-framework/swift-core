@@ -5,6 +5,7 @@
  */
 
 const fs = require('fs');
+const EventEmitter = require('events');
 global.swift = {};
 
 //  Ensure there is a config file that exists
@@ -24,6 +25,7 @@ swift.prefix.server = '!{42f49b}[SERVER] !{fff}';
 
 swift.chalk = require('chalk');
 swift.db = require('./database.js');
+swift.events = new EventEmitter();
 
 swift.loadModules = function(){
     swift.auth = require('./auth.js');

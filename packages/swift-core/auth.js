@@ -59,6 +59,7 @@ mp.events.add('sendDataToServer', (player, username, email, pass, state) => {
                                 if(banRes.length == 0){
                                     player.name = username;
                                     player.call('loginHandler', ['success']);
+                                    swift.events.emit('swift:playerLogin', player);
                                     swift.auth.loadAccount(player);
                                     clearTimeout(player.idleKick);
                                 } else {
