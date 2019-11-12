@@ -1,16 +1,15 @@
-var mysql = require('mysql');
+const pool = require('mysql2/promise').createPool({connectionLimit: swift.config.db_connectionLimit, host: swift.config.db_host, user: swift.config.db_username, password : swift.config.db_password, database: swift.config.db_name, multipleStatements: true});
 
-const pool = mysql.createPool({
-    connectionLimit : swift.config.db_connectionLimit,
-    host : swift.config.db_host,
-    user : swift.config.db_username,
-    password : swift.config.db_password,
-    database : swift.config.db_name
-});
+const components = require('./components');
 
-pool.getConnection((err, connection) => {
-    console.log(`${swift.chalk.green('[Swift-Core]')} Connecting to the database. `);
-    if (err) {
+pool.getConnection()
+    .then(conn => {
+        console.log(`${swift.chalk.green('[Swift-Core]')} Connected Successfully`);
+        components.initModules();
+        swift.loadModules();
+        conn.release();
+        return;
+    }).catch(err => {
         switch(err.code){
         case 'PROTOCOL_CONNECTION_LOST':
             console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: Database connection was closed.')}`);
@@ -30,18 +29,14 @@ pool.getConnection((err, connection) => {
         case 'ENOENT':
             console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: There is no internet connection. Check your connection and try again.')}`);
             break;
+        case 'ENOTFOUND':
+            console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: Database host not found.')}`);
+            break;
         default:
             console.log(`${swift.chalk.green('[Swift-Core] ') + swift.chalk.red('Error: ' + err.code)}`);
             break;
         }
-    }
-    if (connection) {
-        console.log(`${swift.chalk.green('[Swift-Core]')} Connected Successfully`);
-        swift.loadModules();
-        connection.release();
-    }
-    return;
-});
+    });
 
 module.exports = pool;
 

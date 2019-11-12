@@ -1,15 +1,21 @@
 swift.groupData = [];
 
-swift.db.query('SELECT * FROM `groups`', [], function(err, res) {
-    if(err) return console.log(swift.chalk.red(`[MySQL] ERROR: ${err.sqlMessage}\n[MySQL] QUERY: ${err.sql}`));
-    res.forEach(function(group){
-        swift.groupData.push(group);
-    });
-    console.log(`${swift.chalk.green('[Swift-Groups]')} ${swift.groupData.length} groups loaded.`);
-});
-
-
 module.exports = {
+    start: function(){
+        console.log(`${swift.chalk.green('[Swift-Groups]')} Loading...`);
+        return new Promise(async function(resolve, reject) {
+            swift.db.query('SELECT * FROM `groups`').then(([rows]) => {
+                let l = rows.length;
+                for(var i = 0; i < l; i++){
+                    swift.groupData.push(rows[i]);
+                }
+                console.log(`${swift.chalk.green('[Swift-Groups]')} ${swift.groupData.length} groups loaded.`);
+                resolve();
+            }).catch(e => {
+                reject(`${swift.chalk.red(`[MySQL] ${e}`)}`);
+            });
+        });
+    },
     addGroup: function(player, name, level){
         let group = swift.group.getGroup(name);
         let grouplevel = parseInt(level);

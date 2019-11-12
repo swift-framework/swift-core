@@ -27,18 +27,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(35) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `grouplvl` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `money` int(11) NOT NULL DEFAULT '5000',
-  `posX` float DEFAULT NULL,
-  `posY` float DEFAULT NULL,
-  `posZ` float DEFAULT NULL,
+  `grouplvl` tinyint UNSIGNED NOT NULL DEFAULT '0',
+  `money` int NOT NULL DEFAULT '5000',
+  `posX` float DEFAULT 0,
+  `posY` float DEFAULT 0,
+  `posZ` float DEFAULT 72,
   `health` float NOT NULL DEFAULT '100',
   `armour` float NOT NULL DEFAULT '50',
-  `bAmount` int(11) NOT NULL DEFAULT '50'
+  `bAmount` int NOT NULL DEFAULT '50'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -112,12 +112,12 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `bans`
 --
 ALTER TABLE `bans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
